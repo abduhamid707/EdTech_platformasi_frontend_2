@@ -16,5 +16,5 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login'], // Himoya qilish kerak bo'lgan sahifalar
+  matcher: ['/', '/dashboard/:path*', '/login'], // Himoya qilish kerak bo'lgan sahifalar
 }

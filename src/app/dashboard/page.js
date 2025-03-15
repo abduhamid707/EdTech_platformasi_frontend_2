@@ -20,25 +20,28 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import AIAssistant from '@/components/AIAssistant'
 
 export default function DashboardPage() {
   const [students, setStudents] = useState([])
   const [courses, setCourses] = useState([])
   const [popularCourses, setPopularCourses] = useState([])
-
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('theme') === 'dark'
-  })
-
+  const [darkMode, setDarkMode] = useState(true)
+  useEffect(() => {
+    const theme = localStorage.getItem('theme')
+    if (theme === 'dark') {
+      setDarkMode(true)
+    }
+  }, [])
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/student')
+      .get('https://edtech-platformasi-backend-5.onrender.com/api/student')
       .then((res) => setStudents(res.data))
     axios
-      .get('http://localhost:5000/api/course')
+      .get('https://edtech-platformasi-backend-5.onrender.com/api/course')
       .then((res) => setCourses(res.data))
     axios
-      .get('http://localhost:5000/api/analytics/popular-courses')
+      .get('https://edtech-platformasi-backend-5.onrender.com/api/analytics/popular-courses')
       .then((res) => setPopularCourses(res.data))
   }, [])
 
@@ -164,6 +167,8 @@ export default function DashboardPage() {
           ))}
         </div>
       </div>
+
+      <AIAssistant />
     </div>
   )
 }
